@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#8eeeff" />
+  <meta name="theme-color" content="#9cf4ed" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='13' fill='%2342bfd0'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E" />
-  <title>Aero Reef — Frutiger Aero Game</title>
+  <title>Aero Isles — a Frutiger Aero exploration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,40 +14,43 @@
 <body>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="Aero Reef home"><span class="brand-mark">✦</span><span>AERO<span class="brand-light">REEF</span></span></a>
-      <div class="top-note"><span class="live-dot"></span> A little ocean of calm</div>
+      <a class="brand" href="#" aria-label="Aero Isles home"><span class="brand-mark">✦</span><span>AERO<span class="brand-light">ISLES</span></span></a>
+      <div class="top-note"><span class="live-dot"></span> The wide-open blue</div>
       <button class="sound-button glass-button" id="soundButton" aria-label="Toggle sound" title="Toggle sound">♫ <span>Sound on</span></button>
     </header>
 
-    <section class="game-wrap" aria-label="Aero Reef game">
-      <canvas id="game" aria-label="Swim through the reef and collect pearls"></canvas>
+    <section class="game-wrap" aria-label="Aero Isles 3D exploration game">
+      <div id="world" aria-label="Explore a sunlit 3D island world"></div>
       <div class="vignette"></div>
-      <div class="hud" id="hud" aria-live="polite">
-        <div class="hud-card score-card"><span class="hud-label">PEARLS</span><span class="score-line"><span class="pearl-icon">✧</span><strong id="score">0</strong><span class="score-target">/ 12</span></span><div class="progress-track"><i id="progress"></i></div></div>
-        <div class="hud-card air-card"><span class="hud-label">OXYGEN</span><span class="air-line"><span class="air-icon">◉</span><strong id="airText">100%</strong></span><div class="progress-track air-track"><i id="airBar"></i></div></div>
+      <div class="hud" id="hud">
+        <div class="hud-card score-card"><span class="hud-label">LIGHT SEEDS</span><span class="score-line"><span class="pearl-icon">✧</span><strong id="score">0</strong><span class="score-target">/ 8</span></span><div class="progress-track"><i id="progress"></i></div></div>
+        <div class="hud-card explore-card"><span class="hud-label">ISLANDS FOUND</span><span class="air-line"><span class="air-icon">⌖</span><strong id="discoveries">0</strong><span class="score-target">/ 5</span></span></div>
+        <div class="map-card glass-panel" aria-label="World map"><canvas id="map" width="128" height="128"></canvas><span class="map-label">YOU ARE HERE</span></div>
         <button class="pause-button glass-button" id="pauseButton" aria-label="Pause game" title="Pause">Ⅱ</button>
       </div>
+      <div class="location-chip" id="locationChip"><span>⌖</span><b>Sunmeadow</b></div>
       <div class="center-overlay" id="overlay">
         <div class="overlay-card glass-panel" id="overlayCard">
-          <div class="eyebrow"><span>✦</span> A FRUTIGER AERO ADVENTURE</div>
+          <div class="eyebrow"><span>✦</span> A FRUTIGER AERO EXPLORATION</div>
           <div class="mascot" aria-hidden="true"><span class="mascot-shine"></span><span class="mascot-eye"></span><span class="mascot-fin">⌁</span></div>
-          <h1 id="overlayTitle">Aero <em>Reef</em></h1>
-          <p id="overlayText">Slip into a sunlit blue world.<br>Find the pearls. Follow the bubbles.</p>
-          <div class="how-to" id="instructions"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span class="or">or</span><span class="keycap wide">← ↑ ↓ →</span><span class="instructions-text">to swim</span></div>
-          <button class="primary-button" id="startButton">Dive in <span>↗</span></button>
-          <div class="best-note" id="bestNote">BEST DIVE <b id="bestScore">0</b> / 12</div>
+          <h1 id="overlayTitle">Aero <em>Isles</em></h1>
+          <p id="overlayText">A whole bright world, just beyond the blue.<br>Wander, swim, and find the light seeds.</p>
+          <div class="how-to" id="instructions"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span class="or">move</span><span class="keycap wide">DRAG</span><span class="instructions-text">to look · Space to hop</span></div>
+          <button class="primary-button" id="startButton">Explore the Isles <span>↗</span></button>
+          <div class="best-note" id="bestNote">A WORLD MADE FOR WANDERING</div>
         </div>
       </div>
       <div class="toast" id="toast" aria-live="polite"></div>
-      <div class="mobile-controls" id="mobileControls" aria-label="Touch swim controls">
-        <button class="dpad up" data-dir="up" aria-label="Swim up">⌃</button>
-        <button class="dpad left" data-dir="left" aria-label="Swim left">‹</button>
-        <button class="dpad down" data-dir="down" aria-label="Swim down">⌄</button>
-        <button class="dpad right" data-dir="right" aria-label="Swim right">›</button>
+      <div class="mobile-controls" id="mobileControls" aria-label="Touch exploration controls">
+        <button class="dpad up" data-dir="up" aria-label="Move forward">⌃</button>
+        <button class="dpad left" data-dir="left" aria-label="Move left">‹</button>
+        <button class="dpad down" data-dir="down" aria-label="Move backward">⌄</button>
+        <button class="dpad right" data-dir="right" aria-label="Move right">›</button>
+        <button class="look-pad" id="lookPad" aria-label="Drag to look around">LOOK</button>
       </div>
     </section>
-    <footer class="footer"><span>✧ <b>12 pearls</b> to bring the reef back to life</span><span class="footer-right">A tiny escape for a brighter day <span>◌</span></span></footer>
+    <footer class="footer"><span>✧ <b>8 light seeds</b> are scattered across the isles</span><span class="footer-right">No rush. Just explore. <span>◌</span></span></footer>
   </main>
-  <script src="game.js"></script>
+  <script type="module" src="game.js"></script>
 </body>
 </html>
